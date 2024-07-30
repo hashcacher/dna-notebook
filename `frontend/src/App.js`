@@ -1,0 +1,26 @@
+// Step 4: Develop the front-end components for visualizing linear and circular DNA sequences
+import React, { useState, useEffect } from 'react';
+
+function App() {
+  const [sequences, setSequences] = useState({});
+
+  useEffect(() => {
+    fetch('/api/sequences')
+      .then(response => response.json())
+      .then(data => setSequences(data));
+  }, []);
+
+  return (
+    <div>
+      <h1>DNA Sequence Visualizer</h1>
+      {Object.entries(sequences).map(([id, sequence]) => (
+        <div key={id}>
+          <h2>{id}</h2>
+          <p>{sequence}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default App;
